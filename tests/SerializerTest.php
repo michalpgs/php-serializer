@@ -97,7 +97,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerializeResource()
     {
-        $this->setExpectedException(SerializerException::class);
+        $this->setExpectedException("NilPortugues\Serializer\SerializerException");
         $this->serializer->serialize(\fopen(__FILE__, 'r'));
     }
 
@@ -106,7 +106,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSerializeClosure()
     {
-        $this->setExpectedException(SerializerException::class);
+        $this->setExpectedException("NilPortugues\Serializer\SerializerException");
         $this->serializer->serialize(['func' => function () {
             echo 'whoops';
         }]);
@@ -202,19 +202,19 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
 
         $serialized = '{"@type":"NilPortugues\\\\Test\\\\Serializer\\\\SupportClasses\\\\EmptyClass"}';
         $obj = $this->serializer->unserialize($serialized);
-        $this->assertInstanceOf(EmptyClass::class, $obj);
+        $this->assertInstanceOf("NilPortugues\Test\Serializer\SupportClasses\EmptyClass", $obj);
 
         $serialized = '{"@type":"NilPortugues\\\\Test\\\\Serializer\\\\SupportClasses\\\\AllVisibilities","pub":{"@type":"NilPortugues\\\\Test\\\\Serializer\\\\SupportClasses\\\\EmptyClass"},"prot":"protected","priv":"dont tell anyone"}';
         $obj = $this->serializer->unserialize($serialized);
-        $this->assertInstanceOf(AllVisibilities::class, $obj);
-        $this->assertInstanceOf(EmptyClass::class, $obj->pub);
+        $this->assertInstanceOf("NilPortugues\Test\Serializer\SupportClasses\AllVisibilities", $obj);
+        $this->assertInstanceOf("NilPortugues\Test\Serializer\SupportClasses\EmptyClass", $obj->pub);
         $this->assertAttributeSame('protected', 'prot', $obj);
         $this->assertAttributeSame('dont tell anyone', 'priv', $obj);
 
         $serialized = '{"instance":{"@type":"NilPortugues\\\\Test\\\\Serializer\\\\SupportClasses\\\\EmptyClass"}}';
         $array = $this->serializer->unserialize($serialized);
         $this->assertTrue(\is_array($array));
-        $this->assertInstanceOf(EmptyClass::class, $array['instance']);
+        $this->assertInstanceOf("NilPortugues\Test\Serializer\SupportClasses\EmptyClass", $array['instance']);
     }
 
     /**
@@ -321,7 +321,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
     public function testSerializationOfDatePeriodException()
     {
         $this->setExpectedException(
-            SerializerException::class,
+            "NilPortugues\Serializer\SerializerException",
             'DatePeriod is not supported in Serializer. Loop through it and serialize the output.'
         );
 
@@ -354,7 +354,7 @@ class SerializerTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnserializeUnknownClass()
     {
-        $this->setExpectedException(SerializerException::class);
+        $this->setExpectedException("NilPortugues\Serializer\SerializerException");
         $serialized = '{"@type":"UnknownClass"}';
         $this->serializer->unserialize($serialized);
     }

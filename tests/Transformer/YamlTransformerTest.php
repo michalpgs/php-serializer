@@ -94,7 +94,7 @@ comments:
     {
         $serialize = new DeepCopySerializer(new YamlTransformer());
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException("InvalidArgumentException");
         $serialize->unserialize($serialize->serialize($this->getObject()));
     }
 }

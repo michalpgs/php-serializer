@@ -110,7 +110,7 @@ class FlatArrayTransformerTest extends \PHPUnit_Framework_TestCase
     {
         $serialize = new DeepCopySerializer(new FlatArrayTransformer());
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException("\InvalidArgumentException");
         $serialize->unserialize($serialize->serialize($this->getObject()));
     }
 }

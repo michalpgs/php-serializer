@@ -152,7 +152,7 @@ STRING;
     {
         $serialize = new DeepCopySerializer(new XmlTransformer());
 
-        $this->setExpectedException(\InvalidArgumentException::class);
+        $this->setExpectedException("InvalidArgumentException");
         $serialize->unserialize($serialize->serialize($this->getObject()));
     }
 }
