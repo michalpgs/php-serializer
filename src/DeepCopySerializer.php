@@ -15,6 +15,15 @@ use ReflectionClass;
 
 class DeepCopySerializer extends Serializer
 {
+    public function __construct(StrategyInterface $strategy)
+    {
+        parent::__construct($strategy);
+
+        if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
+            throw Exception("This function will not work!");
+        }
+    }
+
     /**
      * Extract the data from an object.
      *
