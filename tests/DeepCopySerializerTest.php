@@ -83,7 +83,6 @@ class DeepCopySerializerTest extends \PHPUnit_Framework_TestCase
 
     public function testSplFixedArraySerialization()
     {
-//        if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
             $splFixedArray = new SplFixedArray(3);
             $splFixedArray[0] = 1;
             $splFixedArray[1] = 2;
@@ -93,12 +92,10 @@ class DeepCopySerializerTest extends \PHPUnit_Framework_TestCase
             $serializedObject = $serializer->serialize($splFixedArray);
 
             $this->assertEquals($splFixedArray, $serializer->unserialize($serializedObject));
-//        }
     }
 
     public function testSplFixedArrayChildSerialization()
     {
-        if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
             $splFixedArray    = new ChildOfSplFixedArray(3);
             $splFixedArray[0] = 1;
             $splFixedArray[1] = 2;
@@ -108,6 +105,5 @@ class DeepCopySerializerTest extends \PHPUnit_Framework_TestCase
             $serializedObject = $serializer->serialize($splFixedArray);
 
             $this->assertEquals($splFixedArray, $serializer->unserialize($serializedObject));
-        }
     }
 }
