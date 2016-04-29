@@ -39,7 +39,7 @@ class DeepCopySerializer extends Serializer
 
     public function serialize($value)
     {
-        if (version_compare(PHP_VERSION, '5.6.0') >= 0) {
+        if (version_compare(PHP_VERSION, '5.6.0') < 0) {
             throw Exception("This function will not work!");
         }
         parent::serialize($value);
